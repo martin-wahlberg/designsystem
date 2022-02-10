@@ -89,6 +89,15 @@ describe('formatNumber with options', () => {
         expect(formatNumber(1234.4, { decimals: 2, ...opts })).toBe('1,234.40');
     });
 
+    test('roundes decimal numbers', () => {
+        expect(formatNumber(1234.004, { decimals: 2, ...opts })).toBe(
+            '1,234.00',
+        );
+        expect(formatNumber(1234.005, { decimals: 2, ...opts })).toBe(
+            '1,234.01',
+        );
+    });
+
     test('format 0 without decimal numbers', () => {
         expect(formatNumber(0, opts)).toBe('0');
     });

@@ -11,9 +11,15 @@ describe('format currency', () => {
 
     test('show decimals for moneys which are not whole', () => {
         expect(formatCurrency('999.99')).toBe(`kr${NON_BREAKING_SPACE}999,99`);
-        expect(formatCurrency(1234.90)).toBe(
+        expect(formatCurrency(1234.9)).toBe(
             `kr${NON_BREAKING_SPACE}1${NON_BREAKING_SPACE}234,90`,
         );
+    });
+    test('rounds decimals', () => {
+        expect(formatCurrency('1.234')).toBe(`kr${NON_BREAKING_SPACE}1,23`);
+        expect(formatCurrency('1.235')).toBe(`kr${NON_BREAKING_SPACE}1,25`);
+        expect(formatCurrency('1.2351')).toBe(`kr${NON_BREAKING_SPACE}1,25`);
+        expect(formatCurrency('2.001')).toBe(`kr${NON_BREAKING_SPACE}2,–`);
     });
 
     test('allows overrides of post and prefix', () => {
